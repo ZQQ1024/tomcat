@@ -21,6 +21,7 @@ RUN chown -R zqq ${CATALINA_HOME}/scripts/ && chmod +x ${CATALINA_HOME}/scripts/
 #settings
 #去除webapps下面的示例文档和管理入口，只留ROOT
 Run rm -rf ${CATALINA_HOME}/webapps/* && \
+rm -rf /srv/zqq/apache-tomcat-8.5.20.tar.gz && \
 mkdir -p ${CATALINA_HOME}/webapps/ROOT
 
 #隐藏版本信息和其他安全设置(删除用户 日志开启 默认列表关闭)
