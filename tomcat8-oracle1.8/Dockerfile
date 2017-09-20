@@ -28,7 +28,8 @@ COPY scripts/ ${CATALINA_HOME}/scripts/
 COPY ./settings/conf/* ${CATALINA_HOME}/conf/
 COPY ./settings/ServerInfo/ ${CATALINA_HOME}/lib/
 
-RUN chown -R zqq:user_grp ${CATALINA_HOME} && \
+RUN find . -type f -name "*.bat" | xargs rm -f && \
+chown -R zqq:user_grp ${CATALINA_HOME} && \
 chmod +x ${CATALINA_HOME}/scripts/*.sh
 
 #以非root运行tomcat
