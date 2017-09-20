@@ -4,14 +4,14 @@ LABEL maintainer "qiangqiang.zhou@changhong.com"
 
 #不要下载到那些root权限的目录下面,下载不动可以到官网换一个链接
 RUN curl -O  http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.20/bin/apache-tomcat-8.5.20.tar.gz && \
-tar -xf apache-tomcat-8.5.20.tar.gz
+tar -xf apache-tomcat-8.5.20.tar.gz && \
+rm apache-tomcat-8.5.20.tar.gz
 
 ARG tomcat=/srv/zqq/tomcat
 ENV CATALINA_HOME=$tomcat \
 PATH=$PATH:$tomcat/bin:$tomcat/scripts \
 JAVA_OPTS="-Xms512m -Xmx2048m" \
 TOMCAT_VER=apache-tomcat-8.5.20
-
 
 RUN mv apache-tomcat-8.5.20 ${CATALINA_HOME} && \
 chmod +x ${CATALINA_HOME}/bin/*sh
@@ -22,9 +22,6 @@ Run rm -rf ${CATALINA_HOME}/webapps/* && \
 mkdir -p ${CATALINA_HOME}/webapps/ROOT
 
 USER root
-
-#部署了以个web项目
-COPY JDBCTest.war ${CATALINA_HOME}/webapps/
 
 #脚本和安全配置（隐藏版本信息）
 COPY scripts/ ${CATALINA_HOME}/scripts/ 
